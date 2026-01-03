@@ -128,7 +128,7 @@ export default function Home() {
                         </div>
                     </section>
 
-                    <main className="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-300 dark:border-gray-700">
+                    <main className="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-300 dark:border-gray-700 max-w-2xl mx-auto">
                         <FileConverter />
                     </main>
 
