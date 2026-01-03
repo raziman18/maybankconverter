@@ -220,19 +220,27 @@ export default function Home() {
                             </p>
 
                             <div className="flex justify-center space-x-4 text-xs mb-4">
-                                <a
-                                    href="/disclaimer"
-                                    className="text-yellow-600 hover:text-yellow-500 dark:text-yellow-500 dark:hover:text-yellow-400 underline transition-colors"
-                                >
-                                    Legal Disclaimer
-                                </a>
+                                <FooterLink
+                                    url="/disclaimer"
+                                    text="Legal Disclaimer"
+                                />
                                 <span className="text-gray-400">|</span>
-                                <a
-                                    href="/report-issue"
-                                    className="text-yellow-600 hover:text-yellow-500 dark:text-yellow-500 dark:hover:text-yellow-400 underline transition-colors"
-                                >
-                                    Report an Issue
-                                </a>
+                                <FooterLink
+                                    url="/report-issue"
+                                    text="Report an Issue"
+                                />
+                                <span className="text-gray-400">|</span>
+                                <FooterLink
+                                    newTab
+                                    url="https://raziman.online/maybank-bank-statement-converter/"
+                                    text="Related Article"
+                                />
+                                <span className="text-gray-400">|</span>
+                                <FooterLink
+                                    newTab
+                                    url="https://raziman.online/"
+                                    text="Blog"
+                                />
                             </div>
 
                             <p className="text-xs text-gray-600 dark:text-gray-500">
@@ -249,5 +257,25 @@ export default function Home() {
                 {JSON.stringify(jsonLd)}
             </Script>
         </>
+    );
+}
+
+function FooterLink({
+    url,
+    text,
+    newTab = false,
+}: {
+    url: string;
+    text: string;
+    newTab?: boolean;
+}) {
+    return (
+        <a
+            href={url}
+            className="text-yellow-600 hover:text-yellow-500 dark:text-yellow-500 dark:hover:text-yellow-400 underline transition-colors"
+            target={newTab ? "_blank" : "_self"}
+        >
+            {text}
+        </a>
     );
 }
