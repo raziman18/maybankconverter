@@ -19,21 +19,15 @@ export function FileConverter() {
     const [csvData, setCsvData] = useState<string | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [transactions, setTransactions] = useState<any[]>([]);
-
-    // Use ref to track if ads have been initialized
     const adsInitialized = useRef(false);
 
-    // Initialize Google AdSense when component mounts - only once
     useEffect(() => {
-        // Only run this once and only in the browser
         if (typeof window !== "undefined" && !adsInitialized.current) {
             try {
-                // Only push if window.adsbygoogle exists and there are actual adsbygoogle ins elements
                 if (
                     window.adsbygoogle &&
                     document.querySelectorAll(".adsbygoogle").length > 0
                 ) {
-                    // Check if any ins elements don't have data-ad-status
                     const uninitializedAds = document.querySelectorAll(
                         ".adsbygoogle:not([data-ad-status])"
                     );
