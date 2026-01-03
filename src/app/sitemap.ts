@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = "https://maybankconverter.vercel.app";
+    const baseUrl = "https://maybankconverter.raziman.online";
     const currentDate = new Date();
 
     return [
