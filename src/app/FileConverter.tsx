@@ -46,7 +46,6 @@ export function FileConverter() {
         }
     }, []);
 
-    // Rest of the component remains unchanged
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         sendGTMEvent({ event: "file_selected" });
         const selectedFile = e.target.files?.[0] || null;
@@ -135,7 +134,6 @@ export function FileConverter() {
 
         if (!csvData || !file) return;
 
-        // Extract filename without extension
         const fileNameWithoutExtension = file.name
             .split(".")
             .slice(0, -1)
@@ -157,26 +155,21 @@ export function FileConverter() {
 
         if (transactions.length === 0 || !file) return;
 
-        // Extract filename without extension
         const fileNameWithoutExtension = file.name
             .split(".")
             .slice(0, -1)
             .join(".");
 
-        // Create worksheet
         const ws = XLSX.utils.json_to_sheet(transactions);
 
-        // Create workbook
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Transactions");
 
-        // Generate Excel file
         XLSX.writeFile(wb, `maybankconverter_${fileNameWithoutExtension}.xlsx`);
     };
 
     return (
         <>
-            {/* You can add an AdSense ins element here if needed */}
             <div className="p-8">
                 <div
                     className={`mb-8 border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
@@ -243,7 +236,6 @@ export function FileConverter() {
                     </div>
                 </div>
 
-                {/* Rest of your component remains unchanged */}
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
                     <button
                         onClick={convertToCsv}
@@ -256,7 +248,6 @@ export function FileConverter() {
                     >
                         {isProcessing ? (
                             <span className="flex items-center justify-center">
-                                {/* Spinner unchanged */}
                                 Processing...
                             </span>
                         ) : (
