@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: "/api/",
             },
         ],
-        sitemap: "https://maybankconverter.vercel.app/sitemap.xml",
-        host: "https://maybankconverter.vercel.app",
+        sitemap: "https://maybankconverter.raziman.online/sitemap.xml",
+        host: "https://maybankconverter.raziman.online",
     };
 }
