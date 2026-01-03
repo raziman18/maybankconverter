@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function DisclaimerPage() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
+        <div className="min-h-screen">
             <div className="container mx-auto px-4 py-12 max-w-3xl">
                 <header className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
@@ -158,14 +158,7 @@ export default function DisclaimerPage() {
                 </div>
 
                 <footer className="mt-8 text-center text-xs text-gray-600 dark:text-gray-500">
-                    <p>
-                        Last updated:{" "}
-                        {new Date().toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                        })}
-                    </p>
+                    <p>Last updated: January 3, 2026</p>
                 </footer>
             </div>
         </div>
