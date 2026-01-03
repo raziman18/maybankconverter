@@ -226,6 +226,13 @@ export default function Home() {
                                 >
                                     Legal Disclaimer
                                 </a>
+                                <span className="text-gray-400">|</span>
+                                <a
+                                    href="/report-issue"
+                                    className="text-yellow-600 hover:text-yellow-500 dark:text-yellow-500 dark:hover:text-yellow-400 underline transition-colors"
+                                >
+                                    Report an Issue
+                                </a>
                             </div>
 
                             <p className="text-xs text-gray-600 dark:text-gray-500">
