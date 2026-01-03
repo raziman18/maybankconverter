@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://maybankconverter.vercel.app"),
+    metadataBase: new URL("https://maybankconverter.raziman.online"),
     title: {
         default: "Maybank Statement to CSV Converter | Free Online Tool",
         template: "%s | Maybank Statement Converter",
@@ -51,10 +51,10 @@ export const metadata: Metadata = {
         "Malaysian bank",
     ],
     authors: [
-        { name: "Your Name", url: "https://maybankconverter.vercel.com" },
+        { name: "Your Name", url: "https://maybankconverter.raziman.online" },
     ],
-    creator: "Your Name",
-    publisher: "Your Name",
+    creator: "Raziman Mahathir",
+    publisher: "Raziman Mahathir",
     formatDetection: {
         email: false,
         address: false,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: "website",
         locale: "en_MY",
-        url: "https://maybankconverter.vercel.app",
+        url: "https://maybankconverter.raziman.online",
         title: "Maybank Statement to CSV Converter",
         description:
             "Convert your Maybank bank statements from PDF to CSV format for free. Process locally without uploading your data.",
@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     manifest: "/site.webmanifest",
     category: "finance",
     verification: {
-        google: "your-google-site-verification-code",
+        google: "5m0bdIrv8jXnnBPsvt_8nuoNIBgyRAu1np7i-tAfW48",
     },
     alternates: {
         canonical: "/",
@@ -151,7 +151,7 @@ export default function RootLayout({
                 />
                 <meta
                     name="google-site-verification"
-                    content="zOrwNzOeSAmip7G9g47N6l05Jx7z43JD6ojpkkIA2Go"
+                    content="5m0bdIrv8jXnnBPsvt_8nuoNIBgyRAu1np7i-tAfW48"
                 />
                 <Script
                     async
