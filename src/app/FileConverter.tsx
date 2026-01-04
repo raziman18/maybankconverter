@@ -218,7 +218,7 @@ export function FileConverter() {
                         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                             {file
                                 ? "File ready to convert"
-                                : "Upload your Maybank Statement"}
+                                : "Upload your Maybank Statement (Bank or Credit Card)"}
                         </h3>
 
                         {file && (
