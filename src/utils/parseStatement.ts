@@ -1,3 +1,47 @@
+export async function isCreditCard(file: ArrayBufferLike) {
+    const extracted = await load(file);
+    const textContent = extracted.map((x) => x.pageContent).join("\n");
+    const lines = textContent.split("\n");
+    const transactionRegex = /STATEMENT OF CREDIT CARD/gm;
+
+    for (const line of lines) {
+        if (line.match(transactionRegex)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+export async function parseCreditCardStatement(file: ArrayBufferLike) {
+    const extracted = await load(file);
+    const textContent = extracted.map((x) => x.pageContent).join("\n");
+    const lines = textContent.split("\n");
+    const transactionRegex =
+        /^(?<post_date>\d{2}\/\d{2})(?<value_date>\d{2}\/\d{2})(?<description>.*?)(?:\s+MY)?(?<amount>\d+\.\d{2})(?<credit>CR|%)?$/gm;
+
+    const transactions: any[] = [];
+
+    for (const line of lines) {
+        console.log(line);
+        if (line.match(transactionRegex)) {
+            const [, postDate, txDate, description, amount, sign] =
+                transactionRegex.exec(line)!;
+            transactions.push({
+                postDate,
+                txDate,
+                description: description.trim(),
+                amount: parseNumber(amount),
+                sign,
+            });
+        }
+    }
+
+    return {
+        transactions,
+    };
+}
+
 export async function parseStatement(file: ArrayBufferLike) {
     const extracted = await load(file);
     const textContent = extracted.map((x) => x.pageContent).join("\n");

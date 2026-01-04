@@ -7,7 +7,11 @@ import {
     FiCheckCircle,
     FiGrid,
 } from "react-icons/fi";
-import { parseStatement } from "@/utils/parseStatement";
+import {
+    isCreditCard,
+    parseCreditCardStatement,
+    parseStatement,
+} from "@/utils/parseStatement";
 import { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { sendGTMEvent } from "@next/third-parties/google";
@@ -78,8 +82,6 @@ export function FileConverter() {
     };
 
     const convertToCsv = async () => {
-        sendGTMEvent({ event: "convert_statement" });
-
         if (!file) {
             setError("Please select a file first");
             return;
@@ -89,34 +91,57 @@ export function FileConverter() {
         setError(null);
 
         try {
-            const statement = await parseStatement(await file.arrayBuffer());
-            const parsedTransactions = statement.transactions.map(
-                (transaction) => {
-                    const row = {
-                        date: transaction.date,
-                        details:
-                            `${transaction.details} ${transaction.descriptions.join(" ")}`
-                                .trim()
-                                .replace(/\s+/g, " "),
-                        amount: `${transaction.sign}${transaction.amount}`,
-                        balance: transaction.balance,
-                    };
-                    return row;
-                }
-            );
+            const fileBuffer = await file.arrayBuffer();
+            const creditCard = await isCreditCard(fileBuffer);
 
-            setTransactions(parsedTransactions);
+            if (creditCard) {
+                sendGTMEvent({ event: "convert_credit_card" });
+                const statement = await parseCreditCardStatement(fileBuffer);
+                const transactions = statement.transactions;
+                setTransactions(transactions);
 
-            const csvRows = parsedTransactions
-                .map((row) =>
-                    Object.values(row)
-                        .map((value) => `"${value}"`)
-                        .join(",")
-                )
-                .join("\n");
+                const csvRows = transactions
+                    .map((row) =>
+                        Object.values(row)
+                            .map((value) => `"${value}"`)
+                            .join(",")
+                    )
+                    .join("\n");
 
-            const header = `"Date","Details","Amount","Balance"`;
-            setCsvData(`${header}\n${csvRows}`);
+                const header = `"Post Date","Tx Date","Description","Amount","Sign"`;
+                setCsvData(`${header}\n${csvRows}`);
+            } else {
+                sendGTMEvent({ event: "convert_statement" });
+                const statement = await parseStatement(fileBuffer);
+                const parsedTransactions = statement.transactions.map(
+                    (transaction) => {
+                        const row = {
+                            date: transaction.date,
+                            details:
+                                `${transaction.details} ${transaction.descriptions.join(" ")}`
+                                    .trim()
+                                    .replace(/\s+/g, " "),
+                            amount: `${transaction.sign}${transaction.amount}`,
+                            balance: transaction.balance,
+                        };
+                        return row;
+                    }
+                );
+
+                setTransactions(parsedTransactions);
+
+                const csvRows = parsedTransactions
+                    .map((row) =>
+                        Object.values(row)
+                            .map((value) => `"${value}"`)
+                            .join(",")
+                    )
+                    .join("\n");
+
+                const header = `"Date","Details","Amount","Balance"`;
+                setCsvData(`${header}\n${csvRows}`);
+            }
+
             sendGTMEvent({ event: "conversion_success" });
         } catch (err) {
             setError(
@@ -182,14 +207,18 @@ export function FileConverter() {
                     onDrop={handleDrop}
                 >
                     <div className="flex flex-col items-center justify-center">
-                        <div className={`p-4 rounded-full mb-4 transition-colors ${isDragging ? "bg-yellow-100 dark:bg-yellow-900/40" : "bg-gray-100 dark:bg-gray-800"}`}>
-                            <FiUploadCloud className={`w-10 h-10 ${isDragging ? "text-yellow-600" : "text-yellow-500"}`} />
+                        <div
+                            className={`p-4 rounded-full mb-4 transition-colors ${isDragging ? "bg-yellow-100 dark:bg-yellow-900/40" : "bg-gray-100 dark:bg-gray-800"}`}
+                        >
+                            <FiUploadCloud
+                                className={`w-10 h-10 ${isDragging ? "text-yellow-600" : "text-yellow-500"}`}
+                            />
                         </div>
 
                         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                             {file
                                 ? "File ready to convert"
-                                : "Upload your Maybank Statement"}
+                                : "Upload your Maybank Statement (Bank or Credit Card)"}
                         </h3>
 
                         {file && (
@@ -205,7 +234,7 @@ export function FileConverter() {
                                         {(file.size / 1024).toFixed(1)} KB
                                     </p>
                                 </div>
-                                <button 
+                                <button
                                     onClick={() => setFile(null)}
                                     className="text-xs font-medium text-gray-400 hover:text-red-500 px-2 py-1"
                                 >
@@ -216,7 +245,8 @@ export function FileConverter() {
 
                         {!file && (
                             <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-xs mx-auto">
-                                Drag and drop your PDF here, or click the button below
+                                Drag and drop your PDF here, or click the button
+                                below
                             </p>
                         )}
 
@@ -301,23 +331,33 @@ export function FileConverter() {
                     <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 rounded-xl">
                         <div className="flex items-center mb-4 text-green-600 dark:text-green-400">
                             <FiCheckCircle className="w-5 h-5 mr-2" />
-                            <h3 className="font-bold text-sm uppercase tracking-wide">Conversion Successful</h3>
+                            <h3 className="font-bold text-sm uppercase tracking-wide">
+                                Conversion Successful
+                            </h3>
                         </div>
-                        
+
                         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
                             <div className="px-4 py-2 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                                <span className="text-xs font-mono text-gray-500 dark:text-gray-400">Preview</span>
-                                <span className="text-xs text-gray-400">{csvData.split('\n').length - 1} transactions found</span>
+                                <span className="text-xs font-mono text-gray-500 dark:text-gray-400">
+                                    Preview
+                                </span>
+                                <span className="text-xs text-gray-400">
+                                    {csvData.split("\n").length - 1}{" "}
+                                    transactions found
+                                </span>
                             </div>
                             <div className="p-4 overflow-x-auto">
                                 <pre className="text-xs font-mono text-gray-600 dark:text-gray-300 whitespace-pre">
                                     {csvData.split("\n").slice(0, 6).join("\n")}
-                                    {csvData.split("\n").length > 6 ? "\n..." : ""}
+                                    {csvData.split("\n").length > 6
+                                        ? "\n..."
+                                        : ""}
                                 </pre>
                             </div>
                         </div>
                         <p className="text-center text-xs text-gray-400 dark:text-gray-500 mt-4">
-                            Your files are processed locally in your browser and are never uploaded to any server.
+                            Your files are processed locally in your browser and
+                            are never uploaded to any server.
                         </p>
                     </div>
                 )}

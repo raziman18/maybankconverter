@@ -5,11 +5,12 @@ import MaybankStatementConverterIcon from "./Icon";
 
 // SEO metadata
 export const metadata: Metadata = {
-    title: "Convert Maybank Bank Statement to CSV/Excel | Free Online Tool",
+    title: "Convert Maybank Bank & Credit Card Statement to CSV/Excel | Free Online Tool",
     description:
-        "Free online tool to convert Maybank bank statements from PDF to CSV or Excel format. Import your Maybank transactions easily into Excel, Google Sheets, or financial software.",
+        "Free online tool to convert Maybank bank and credit card statements from PDF to CSV or Excel format. Import your Maybank transactions easily into Excel, Google Sheets, or financial software.",
     keywords: [
         "Maybank statement converter",
+        "Maybank credit card converter",
         "Maybank to CSV",
         "Maybank to Excel",
         "convert Maybank PDF to CSV",
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
         "Maybank transaction export",
         "Maybank statement parser",
         "bank statement converter",
+        "credit card statement converter",
         "free Maybank converter",
         "online Maybank statement converter",
         "free PDF to CSV converter",
@@ -31,18 +33,18 @@ export const metadata: Metadata = {
         "online transaction extractor",
     ],
     openGraph: {
-        title: "Maybank Statement to CSV/Excel Converter",
+        title: "Maybank Bank & Credit Card Statement to CSV/Excel Converter",
         description:
-            "Convert your Maybank bank statements from PDF to CSV or Excel instantly. No data is stored - your files remain private.",
+            "Convert your Maybank bank and credit card statements from PDF to CSV or Excel instantly. No data is stored - your files remain private.",
         type: "website",
         locale: "en_US",
         siteName: "Maybank Statement Converter",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Convert Maybank Bank Statements to CSV/Excel",
+        title: "Convert Maybank Bank & Credit Card Statements to CSV/Excel",
         description:
-            "Free tool to convert Maybank PDF statements to CSV or Excel format for financial tracking",
+            "Free tool to convert Maybank PDF bank and credit card statements to CSV or Excel format for financial tracking",
     },
     alternates: {
         canonical: "https://maybankconverter.vercel.com",
@@ -62,7 +64,7 @@ const jsonLd = {
         priceCurrency: "USD",
     },
     description:
-        "Free online tool to convert Maybank bank statements from PDF to CSV or Excel format for easy import into financial software.",
+        "Free online tool to convert Maybank bank and credit card statements from PDF to CSV or Excel format for easy import into financial software.",
     author: {
         "@type": "Person",
         name: "Raziman",
@@ -89,9 +91,10 @@ export default function Home() {
                             <span className="font-semibold">
                                 Free online tool
                             </span>{" "}
-                            to convert your Maybank bank statements from PDF to
-                            CSV or Excel format for easy import into Excel,
-                            Google Sheets, or financial software
+                            to convert your Maybank bank and credit card
+                            statements from PDF to CSV or Excel format for easy
+                            import into Excel, Google Sheets, or financial
+                            software
                         </p>
                     </header>
                     <section className="mb-8 text-center">
@@ -142,8 +145,8 @@ export default function Home() {
                                 <span className="font-medium">
                                     Download your statement:
                                 </span>{" "}
-                                Log in to Maybank2u and download your bank
-                                statement as a PDF
+                                Log in to Maybank2u and download your bank or
+                                credit card statement as a PDF
                             </li>
                             <li className="mb-2">
                                 <span className="font-medium">
@@ -183,11 +186,11 @@ export default function Home() {
                         <div className="text-gray-900 dark:text-gray-300 space-y-3">
                             <p>
                                 This <strong>100% free online tool</strong>{" "}
-                                converts Maybank bank statements from PDF format
-                                to CSV (Comma-Separated Values) or Excel (XLSX)
-                                format. The conversion happens entirely in your
-                                browser - your financial data never leaves your
-                                device.
+                                converts Maybank bank and credit card statements
+                                from PDF format to CSV (Comma-Separated Values)
+                                or Excel (XLSX) format. The conversion happens
+                                entirely in your browser - your financial data
+                                never leaves your device.
                             </p>
                             <p>
                                 The converter extracts transaction dates,
@@ -197,10 +200,11 @@ export default function Home() {
                                 software.
                             </p>
                             <p>
-                                Perfect for Maybank account holders who want to
-                                track their finances more effectively in Excel
-                                or need to import transaction data into
-                                budgeting tools using CSV files.
+                                Perfect for Maybank account and credit card
+                                holders who want to track their finances more
+                                effectively in Excel or need to import
+                                transaction data into budgeting tools using CSV
+                                files.
                             </p>
                         </div>
                     </section>
@@ -208,10 +212,10 @@ export default function Home() {
                     <footer className="mt-8 text-center border-t border-gray-300 dark:border-gray-700 pt-8">
                         <div className="max-w-3xl mx-auto">
                             <p className="text-sm text-gray-700 dark:text-gray-400 mb-4">
-                                This free online Maybank statement to CSV/Excel
-                                converter processes all files locally in your
-                                browser. No data is uploaded to any server or
-                                stored anywhere.
+                                This free online Maybank bank and credit card
+                                statement to CSV/Excel converter processes all
+                                files locally in your browser. No data is
+                                uploaded to any server or stored anywhere.
                             </p>
 
                             <p className="text-xs text-gray-600 dark:text-gray-500 mb-4">
