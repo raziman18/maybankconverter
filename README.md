@@ -74,47 +74,6 @@ yarn build
 yarn start
 ```
 
-## Project Structure
-
-```
-maybankconverter/
-├── public/              # Static assets (icons, images)
-├── src/
-│   ├── app/            # Next.js app directory
-│   │   ├── page.tsx    # Home page with SEO metadata
-│   │   ├── layout.tsx  # Root layout
-│   │   ├── globals.css # Global styles
-│   │   ├── FileConverter.tsx    # Main converter component
-│   │   ├── disclaimer/          # Legal disclaimer page
-│   │   └── report-issue/        # Issue reporting page
-│   ├── utils/
-│   │   └── parseStatement.ts    # PDF parsing logic
-│   └── tests/          # Test PDF files
-│       ├── credit/     # Sample credit card statements
-│       └── debit/      # Sample bank statements
-├── package.json
-├── tsconfig.json
-├── tailwind.config.js
-├── next.config.ts
-└── README.md
-```
-
-## How It Works
-
-1. **Upload**: User uploads a Maybank PDF statement (bank or credit card)
-2. **Detection**: System automatically detects statement type (credit card vs bank account)
-3. **Parsing**: PDF is parsed using `pdf-parse` to extract transaction data
-4. **Processing**: Transaction data is organized into structured format
-5. **Export**: User can download the data as CSV or Excel file
-
-### Key Components
-
-- **`FileConverter.tsx`**: Main UI component handling file upload, processing, and download
-- **`parseStatement.ts`**: Core parsing logic that extracts transaction data from PDFs
-- **`isCreditCard()`**: Detects if the statement is a credit card statement
-- **`parseCreditCardStatement()`**: Parses credit card transactions
-- **`parseStatement()`**: Parses bank account transactions
-
 ## Privacy & Security
 
 - **No Server Upload**: All processing happens entirely in the browser using client-side JavaScript
@@ -122,36 +81,6 @@ maybankconverter/
 - **Local Processing**: Your financial data remains on your device at all times
 - **Open Source**: Code is publicly available for transparency and audit
 
-## Data Format
-
-### Bank Statement Output (CSV/Excel)
-
-| Date | Details | Amount | Balance |
-|------|---------|---------|---------|
-| 01/01/2026 | Transaction description | -100.00 | 5,000.00 |
-
-### Credit Card Statement Output (CSV/Excel)
-
-| Post Date | Tx Date | Description | Amount | Sign |
-|-----------|---------|-------------|---------|------|
-| 01/01/2026 | 30/12/2025 | Purchase details | 100.00 | - |
-
-## Testing
-
-Test PDF files are included in the `src/tests/` directory:
-- `src/tests/credit/` - Sample credit card statements
-- `src/tests/debit/` - Sample bank statements
-
-## Contributing
-
-Contributions are welcome! If you find a bug or have a feature request:
-
-1. Check existing issues or create a new one
-2. Fork the repository
-3. Create a feature branch (`git checkout -b feature/amazing-feature`)
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
 
 ## License
 
@@ -180,4 +109,4 @@ This tool is provided "as is" without warranty of any kind. Users should verify 
 
 ---
 
-**Live Demo:** [maybankconverter.vercel.com](https://maybankconverter.raziman.online)
+**Live Demo:** [maybankconverter.raziman.online](https://maybankconverter.raziman.online)
