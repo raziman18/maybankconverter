@@ -47,7 +47,7 @@ export const metadata: Metadata = {
             "Free tool to convert Maybank PDF bank and credit card statements to CSV or Excel format for financial tracking",
     },
     alternates: {
-        canonical: "https://maybankconverter.vercel.com",
+        canonical: "https://maybankconverter.raziman.online",
     },
 };
 
