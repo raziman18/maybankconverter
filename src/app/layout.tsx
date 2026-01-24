@@ -50,9 +50,7 @@ export const metadata: Metadata = {
         "CSV export",
         "Malaysian bank",
     ],
-    authors: [
-        { name: "Your Name", url: "https://maybankconverter.raziman.online" },
-    ],
+    authors: [{ name: "Raziman Mahathir", url: "https://raziman.online" }],
     creator: "Raziman Mahathir",
     publisher: "Raziman Mahathir",
     formatDetection: {
