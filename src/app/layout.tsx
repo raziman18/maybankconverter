@@ -115,7 +115,7 @@ export const metadata: Metadata = {
         google: "5m0bdIrv8jXnnBPsvt_8nuoNIBgyRAu1np7i-tAfW48",
     },
     alternates: {
-        canonical: "/",
+        canonical: "https://maybankconverter.raziman.online",
         languages: {
             "en-US": "/en-us",
             "ms-MY": "/ms-my",
